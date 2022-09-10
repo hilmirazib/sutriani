@@ -1,0 +1,37 @@
+ // migrate the database
+php artisan migrate:rollback // delete the last migration
+
+
+sebelum membuat migration check tablenya disini apa aja yang diperlukan
+php artisan make:migration create_add_column_to_users_table --create=users
+php artisan make:migration create_add_column_to_users_table
+php artisan make:migration buat_sessions_table
+php artisan make:migration tambah_kolom_baru_to_users_table
+php artisan make:migration buat_data_wali_kelas_table
+
+//buat Folder Helpers/helpers.php di app/Http
+//pergi ke composer.json dan tambahkan autoload
+"autoload": {
+        "psr-4": {
+            "App\\": "app/",
+            "Database\\Factories\\": "database/factories/",
+            "Database\\Seeders\\": "database/seeders/"
+        },
+        "files": [
+            "app/Http/Helpers/helpers.php"
+        ]
+    },
+
+cara jalankan
+composer dump-autoload
+php artisan tinker
+
+
+
+*/
+https://dbdiagram.io/d/6302d257f1a9b01b0fb3821f
+
+
+php artisan serve //untuk development
+php -S localhost:8000 -t public //untuk development
+

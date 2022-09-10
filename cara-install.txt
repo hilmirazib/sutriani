@@ -1,0 +1,5 @@
+clone project
+compeser install
+php artisan key:generate
+atur env
+php artisan migrate
