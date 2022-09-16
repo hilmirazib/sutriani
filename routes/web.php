@@ -1,5 +1,7 @@
 <?php
 
+use App\Http\Controllers\GuruController;
+use App\Http\Controllers\MataPelajaranController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -18,3 +20,10 @@ Route::get('/', fn () => redirect()->route('login'));
 Route::middleware(['auth:sanctum', 'verified'])->get('/dashboard', function () {
     return view('home');
 })->name('dashboard');
+Route::group(['middleware' => 'auth'], function () {
+    Route::get('/guru/data', [GuruController::class, 'data'])->name('guru.data');
+    Route::resource('/guru', GuruController::class);
+
+    Route::get('/mata-pelajaran/data', [MataPelajaranController::class, 'data'])->name('mata_pelajaran.data');
+    Route::resource('/mata-pelajaran', MataPelajaranController::class);
+});

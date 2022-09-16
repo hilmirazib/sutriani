@@ -21,6 +21,16 @@
           </a>
         </li>
         <li>
+          <a href="{{ route('guru.index') }}">
+            <i class="fa fa-file-pdf-o"></i> <span>Guru</span>
+          </a>
+        </li>
+        <li>
+          <a href="{{ route('mata-pelajaran.index') }}">
+            <i class="fa fa-file-pdf-o"></i> <span>Mata Pelajaran</span>
+          </a>
+        </li>
+        <li>
           <a href="#">
             <i class="fa fa-file-pdf-o"></i> <span>Nilai Sikap</span>
           </a>
