@@ -5,7 +5,7 @@ namespace App\Http\Middleware;
 use Closure;
 use Illuminate\Http\Request;
 
-class IsGuru
+class RoleMiddleware
 {
     /**
      * Handle an incoming request.
@@ -14,12 +14,12 @@ class IsGuru
      * @param  \Closure(\Illuminate\Http\Request): (\Illuminate\Http\Response|\Illuminate\Http\RedirectResponse)  $next
      * @return \Illuminate\Http\Response|\Illuminate\Http\RedirectResponse
      */
-    public function handle(Request $request, Closure $next)
+    public function handle(Request $request, Closure $next, ...$roles)
     {
-        if (auth()->user()->is_admin == 1) {
+        $user = auth()->user();
+        if (in_array($user->role->name, $roles)) {
             return $next($request);
         }
-
-        return redirect('home')->with('error', "You don't have guru access.");
+        return redirect()->route('dashboard');
     }
 }

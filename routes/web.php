@@ -1,7 +1,11 @@
 <?php
 
+use App\Http\Controllers\DataNSikapController;
+use App\Http\Controllers\DataSiswaController;
 use App\Http\Controllers\GuruController;
+use App\Http\Controllers\KeterampilanController;
 use App\Http\Controllers\MataPelajaranController;
+use App\Http\Controllers\PengetahuanController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -17,13 +21,34 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/', fn () => redirect()->route('login'));
 
-Route::middleware(['auth:sanctum', 'verified'])->get('/dashboard', function () {
-    return view('home');
-})->name('dashboard');
-Route::group(['middleware' => 'auth'], function () {
+Route::get('/dashboard', function () {
+    return view('dashboard');
+})->name('dashboard')->middleware(['auth', 'role:guru,siswa']);
+Route::get('/mata-pelajaran/data', [MataPelajaranController::class, 'data'])->name('mata_pelajaran.data')->middleware(['auth', 'role:guru,siswa']);
+Route::get('/data-nilai-sikap/data', [DataNSikapController::class, 'data'])->name('data_n_sikap.data')->middleware(['auth', 'role:guru,siswa']);
+Route::get('/data-keterampilan/data', [KeterampilanController::class, 'data'])->name('data_keterampilan.data')->middleware(['auth', 'role:guru,siswa']);
+Route::get('/data-pengetahuan/data', [PengetahuanController::class, 'data'])->name('data_pengetahuan.data')->middleware(['auth', 'role:guru,siswa']);
+Route::group([
+    'middleware' => ['auth', 'role:guru']
+], function () {
     Route::get('/guru/data', [GuruController::class, 'data'])->name('guru.data');
     Route::resource('/guru', GuruController::class);
 
-    Route::get('/mata-pelajaran/data', [MataPelajaranController::class, 'data'])->name('mata_pelajaran.data');
     Route::resource('/mata-pelajaran', MataPelajaranController::class);
+
+    Route::resource('/data-nilai-sikap', DataNSikapController::class);
+
+    Route::resource('/data-keterampilan', KeterampilanController::class);
+
+    Route::resource('/data-pengetahuan', PengetahuanController::class);
+
+    Route::get('/data-siswa/data', [DataSiswaController::class, 'data'])->name('data_siswa.data');
+    Route::resource('/data-siswa', DataSiswaController::class);
+});
+Route::group([
+    'middleware' => ['auth', 'role:siswa']
+], function () {
+    Route::get('/nilai-sikap-member', [DataNSikapController::class, 'member'])->name('nilai_sikap.member');
+    Route::get('/data-keterampilan', [KeterampilanController::class, 'member'])->name('nilai_keterampilan.member');
+    Route::get('/data-pengetahuan', [PengetahuanController::class, 'member'])->name('nilai_pengetahuan.member');
 });

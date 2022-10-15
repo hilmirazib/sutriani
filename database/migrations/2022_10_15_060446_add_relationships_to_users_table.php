@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class TambahKolomBaruToUsersTable extends Migration
+class AddRelationshipsToUsersTable extends Migration
 {
     /**
      * Run the migrations.
@@ -14,8 +14,11 @@ class TambahKolomBaruToUsersTable extends Migration
     public function up()
     {
         Schema::table('users', function (Blueprint $table) {
-            $table->string('foto')->nullable();
-            $table->tinyInteger('level')->default(0);
+            $table->foreign('role_id')
+                ->references('id')
+                ->on('roles')
+                ->onUpdate('no action')
+                ->onDelete('restrict');
         });
     }
 
@@ -27,8 +30,7 @@ class TambahKolomBaruToUsersTable extends Migration
     public function down()
     {
         Schema::table('users', function (Blueprint $table) {
-            $table->dropColumn('foto');
-            $table->dropColumn('level');
+            $table->dropForeign('users_role_id_foreign');
         });
     }
 }
