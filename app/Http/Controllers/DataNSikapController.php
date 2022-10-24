@@ -129,4 +129,17 @@ class DataNSikapController extends Controller
     {
         return view('datansikap.member');
     }
+    public function dataMember()
+    {
+        $data_n_sikap = DataNSikap::leftJoin('users', 'users.id', 'data_nilai_sikap.id_siswa')
+            ->select('data_nilai_sikap.*', 'name')
+            ->where('id', auth()->user()->id)
+            ->orderBy('id_n_sikap', 'desc')
+            ->get();
+
+        return datatables()
+            ->of($data_n_sikap)
+            ->addIndexColumn()
+            ->make(true);
+    }
 }

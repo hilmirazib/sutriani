@@ -42,7 +42,7 @@
             serverSide: true,
             autoWidth: false,
             ajax: {
-                url: '{{ route('data_n_sikap.data') }}',
+                url: '{{ route('sikap_member.data') }}',
             },
             columns: [
                 {data: 'DT_RowIndex', searchable: false, sortable: false},

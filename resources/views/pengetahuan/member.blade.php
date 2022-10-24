@@ -41,7 +41,7 @@
             serverSide: true,
             autoWidth: false,
             ajax: {
-                url: '{{ route('data_pengetahuan.data') }}',
+                url: '{{ route('pengetahuan_member.data') }}',
             },
             columns: [
                 {data: 'DT_RowIndex', searchable: false, sortable: false},

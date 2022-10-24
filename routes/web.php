@@ -4,8 +4,10 @@ use App\Http\Controllers\DataNSikapController;
 use App\Http\Controllers\DataSiswaController;
 use App\Http\Controllers\GuruController;
 use App\Http\Controllers\KeterampilanController;
+use App\Http\Controllers\KeterampilanMemberController;
 use App\Http\Controllers\MataPelajaranController;
 use App\Http\Controllers\PengetahuanController;
+use App\Http\Controllers\PengetahuanMemberController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -48,7 +50,10 @@ Route::group([
 Route::group([
     'middleware' => ['auth', 'role:siswa']
 ], function () {
+    Route::get('/keterampilan-member/data', [KeterampilanMemberController::class, 'data'])->name('keterampilan_member.data');
+    Route::get('/pengetahuan-member/data', [PengetahuanMemberController::class, 'data'])->name('pengetahuan_member.data');
+    Route::get('/sikap-member/data', [DataNSikapController::class, 'dataMember'])->name('sikap_member.data');
     Route::get('/nilai-sikap-member', [DataNSikapController::class, 'member'])->name('nilai_sikap.member');
-    Route::get('/data-keterampilan', [KeterampilanController::class, 'member'])->name('nilai_keterampilan.member');
-    Route::get('/data-pengetahuan', [PengetahuanController::class, 'member'])->name('nilai_pengetahuan.member');
+    Route::get('/nilai-keterampilan', [KeterampilanMemberController::class, 'member'])->name('nilai_keterampilan.member');
+    Route::get('/nilai-pengetahuan', [PengetahuanMemberController::class, 'member'])->name('nilai_pengetahuan.member');
 });

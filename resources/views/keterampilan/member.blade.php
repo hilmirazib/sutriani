@@ -39,7 +39,7 @@
             serverSide: true,
             autoWidth: false,
             ajax: {
-                url: '{{ route('data_keterampilan.data') }}',
+                url: '{{ route('keterampilan_member.data') }}',
             },
             columns: [
                 {data: 'DT_RowIndex', searchable: false, sortable: false},

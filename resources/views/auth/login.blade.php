@@ -4,12 +4,12 @@
         
         <!-- /.login-logo -->
         <div class="login-box-body">
-            <div class="login-logo">
+            {{-- <div class="login-logo">
                 <a href="{{ url('/') }}">
                     <img src="{{ asset('img/logo.png') }}" alt="logo.png" width="100">
                 </a>
-            </div>
-
+            </div> --}}
+            <p class="login-box-msg">Sign in to start your session</p>
             <form action="{{ route('login') }}" method="post">
                 @csrf
                 <div class="form-group has-feedback @error('email') has-error @enderror">

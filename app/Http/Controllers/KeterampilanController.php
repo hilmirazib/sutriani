@@ -8,11 +8,6 @@ use Illuminate\Http\Request;
 
 class KeterampilanController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
     public function index()
     {
         $data_siswa = DataSiswa::where('role_id', '2')->pluck('name', 'id');
@@ -119,9 +114,5 @@ class KeterampilanController extends Controller
         $data_keterampilan->delete();
 
         return response(null, 204);
-    }
-    public function member()
-    {
-        return view('keterampilan.member');
     }
 }
